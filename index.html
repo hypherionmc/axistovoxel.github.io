@@ -56,6 +56,8 @@
                 $.each(matches[1].split(","), function(i, value) {
                     item = item.replace(value, value * 16);
                 });
+                item = item.replaceAll("new AxisAlignedBB", "Block.makeCuboidShape");
+                item = item.replaceAll(new RegExp("\\bAxisAlignedBB\\b", 'g'), "VoxelShape");
                 input += item + "\n";
             }
         });
