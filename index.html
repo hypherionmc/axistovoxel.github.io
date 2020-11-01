@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AxisAlignedBB to VoxelShape converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/vs2015.min.css">
+
+    <style>
+        body {
+            background: #000;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <br>
+        <h1>AxisAlignedBB to VoxelShape</h1>
+        <p>This is a simple online tool to convert AxisAlignedBB from Forge 1.12.2 to 1.14+ VoxelShapes.<br><b>Double check the conversion! May not always be accurate!</b></p>
+        <br><br>
+        <textarea id="inputText" style="width: 100%; min-height: 100px;"></textarea><br><br>
+        <button type="button" text="" onclick="convertText();" class="btn btn-success">Convert</button><br><br>
+        <pre class="text-left"><code id="outText" class="language-java"></code></pre><br><br>
+        <p>Even though this script is opensource, it may still not be used without permission. If you wish to host this yourself, please contact me on discord.<br>
+            <b>Created by HypherionMC - Join my discord <a href="https://discord.gg/PdVnXf9">HERE</a></b>
+        </p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/languages/java.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+
+    hljs.initHighlightingOnLoad();
+
+    function convertText() {
+
+        var regExp = /\(([^)]+)\)/;
+        var input = "";
+
+        var arrayOfLines = $("#inputText").val().split('\n');
+
+        $.each(arrayOfLines, function(index, item) {
+            if (item != "") {
+                var matches = regExp.exec(item);
+                $.each(matches[1].split(","), function(i, value) {
+                    item = item.replace(value, value * 16);
+                });
+                input += item + "\n";
+            }
+        });
+
+        $("#outText").text(input);
+    }
+</script>
+
+</body>
+</html>
